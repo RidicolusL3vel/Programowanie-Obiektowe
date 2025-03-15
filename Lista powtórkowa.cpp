@@ -190,7 +190,8 @@ int main()
     int numerZadania;
     cout << "Podaj numer zadania: \n"
         << "1. Zadania powtorkowe 1\n"
-        << "2. Zadania powtorkowe 2\n";
+        << "2. Zadania powtorkowe 2\n"
+		<< "3. Zadanie powtorkowe 3\n";
     cin >> numerZadania;
     switch (numerZadania)
     {
