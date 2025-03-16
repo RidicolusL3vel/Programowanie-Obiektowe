@@ -185,13 +185,90 @@ void zadaniaPowtorkowe2() {
     }
 }
 
+void zadaniePowtorkowe3() {
+    cout << "Suma liczb nieparzystych mniejszych od n\n";
+	cout << "Podaj n: ";
+	int n;
+	cin >> n;
+	int suma = 0;
+	for (int i = 1; i < n; i += 2) {
+		suma += i;
+	}
+	cout << "Suma liczb nieparzystych mniejszych od " << n << " wynosi: " << suma << '\n';
+}
+
+void zadaniePowtorkowe4() {
+	cout << "Wielokrotnosci 7 w przedziale <a, b>\n";
+	cout << "Podaj a: ";
+    int a; cin >> a;
+	cout << "Podaj b: ";
+	int b; cin >> b;
+	int count = 0;
+	for (int i = b; i >= a; i--) {
+		if (i % 7 == 0) {
+			cout << i << " ";
+			count++;
+		}
+	}
+	cout << '\n';
+	cout << "W przedziale (" << a << ", " << b << ") jest " << count << " wielokrotnosci liczby 7\n";
+}
+
+void zadaniePowtorkowe5() {
+    cout << "Podaj podpunkt: \n"
+		<< "a) Czy liczba jest doskonala\n"
+		<< "b) Znajdowanie kolejnych liczb doskonalych\n";
+	char podpunkt;
+	cin >> podpunkt;
+    switch (podpunkt) {
+	case 'a': {
+		cout << "Podaj liczbe: ";
+		int n;
+		cin >> n;
+		int suma = 0;
+		for (int i = 1; i < n; i++) {
+			if (n % i == 0) {
+				suma += i;
+			}
+		}
+		if (suma == n) {
+			cout << "Liczba " << n << " jest doskonala\n";
+		}
+		else {
+			cout << "Liczba " << n << " nie jest doskonala\n";
+		}
+		break;
+	}
+	case 'b': {
+		cout << "Podaj do ktorej liczby chcesz sprawdzic: ";
+		int n;
+		cin >> n;
+        int suma = 0;
+		for (int i = 1; i <= n; i++) {
+			suma = 0;
+			for (int j = 1; j < i; j++) {
+				if (i % j == 0) {
+					suma += j;
+				}
+			}
+			if (suma == i) {
+				cout << i << " ";
+			}
+		}
+		cout << '\n';
+		break;
+	}
+    }
+}
+
 int main()
 {
     int numerZadania;
     cout << "Podaj numer zadania: \n"
         << "1. Zadania powtorkowe 1\n"
         << "2. Zadania powtorkowe 2\n"
-		<< "3. Zadanie powtorkowe 3\n";
+		<< "3. Zadanie powtorkowe 3\n"
+		<< "4. Zadanie powtorkowe 4\n";
     cin >> numerZadania;
     switch (numerZadania)
     {
@@ -202,6 +279,18 @@ int main()
         case 2:
             zadaniaPowtorkowe2();
             break;
+            
+        case 3:
+			zadaniePowtorkowe3();
+			break;
+
+		case 4:
+			zadaniePowtorkowe4();
+			break;
+
+		case 5:
+			zadaniePowtorkowe5();
+			break;
 
         default:
             break;
