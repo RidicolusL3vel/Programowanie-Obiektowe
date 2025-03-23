@@ -118,7 +118,7 @@ void CalculatorBody() {
     }
 }
 
-int main()//błędy: delenie przez 0 i modulo przez 0
+int main()//błędy: delenie przez 0 i modulo przez 0jhjh
 {
     //while (true) {
     CalculatorBody();
