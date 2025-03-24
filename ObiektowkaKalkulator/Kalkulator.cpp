@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include "Kalkulator.h"
 using namespace std;
 
 double memory = 0; //pamięć kalkulatora
@@ -20,36 +21,38 @@ int Menu() {
     return number;
 }
 
-double add(double & a, double b) {
-    return a + b;
+void Kalkulator::add(double & a, double b) {
+    this->memory = a + b;
 }
-double subtract(double& a, double b) {
-    return a - b;
+void Kalkulator::subtract(double& a, double b) {
+    this->memory =  a - b;
 }
-double multiply(double& a, double b) {
-    return a * b;
+void Kalkulator::multiply(double& a, double b) {
+    this->memory = a * b;
 }
-double divide(double& a, double b) {
-    return a / b;
+void Kalkulator::divide(double& a, double b) {
+    this->memory = a / b;
 }
-double modulo(double& a, double b) {
-    return a - (int)(a / b) * b;
+void Kalkulator::modulo(double& a, double b) {
+    this->memory = a - (int)(a / b) * b;
 }
-void erase(double& memory) {
-    memory = 0;
+void Kalkulator::erase(double& memory) {
+    this->memory = 0;
+    this->mem_used = false;
 }
-double memory_used(double & memory) {
-	if (memory != 0 && mem_used == true) {
-		cout << "Memory used: " << memory << endl;
-		return memory;
-	}
-	else {
-		cout << "Memory is empty\nGive the first number: ";
-        int a = 0;
-		mem_used = true;
+double Kalkulator::checkForMemory(double & memory) {
+    if (mem_used == false || memory == 0) {
+        return memory;
+    }
+    else {
+        double a;
+        cout << "Give number: ";
         cin >> a;
-		return a;
-	}
+        return a;
+    }
+}
+double Kalkulator::getMemory() {
+    return this->memory;
 }
 void firstMultiplyOrDivide(double & memory) {
     if (memory == 0)
@@ -64,52 +67,53 @@ double getSecondNumber() {
 
 
 void CalculatorBody() {
+    Kalkulator Calc;
     double a, b;
     if(memory == 0)
 		mem_used = false;
     switch (Menu()) {
         case 1: {
-			a = memory_used(memory);
+			a = Calc.checkForMemory(memory);
 			b = getSecondNumber();
-            memory = add(a, b);
+            Calc.add(a, b);
             break;
         }
         case 2: {
-            a = memory_used(memory);
+            a = Calc.checkForMemory(memory);
 			b = getSecondNumber();
-            memory = subtract(a, b);
+            Calc.subtract(a, b);
             break;
         }
         case 3: {
             firstMultiplyOrDivide(memory);
-            a = memory_used(memory);
+            a = Calc.checkForMemory(memory);
             b = getSecondNumber();
-            memory = multiply(a, b);
+            Calc.multiply(a, b);
             break;
         }
         case 4: {
             firstMultiplyOrDivide(memory);
-            a = memory_used(memory);
+            a = Calc.checkForMemory(memory);
             b = getSecondNumber();
             if (b == 0) {
 				cout << "Error: division by 0\n\n";
 				break;
             }
-            memory = divide(a, b);
+            Calc.divide(a, b);
             break;
         }
         case 5: {
-            a = memory_used(memory);
+            a = Calc.checkForMemory(memory);
             b = getSecondNumber();
             if (b == 0) {
 				cout << "Error: modulo by 0\n\n";
                 break;
             }
-            memory = modulo(a, b); //a - (int)(a / b) * b działa jak modulo z jakiegoś powodu
+            Calc.modulo(a, b); //a - (int)(a / b) * b działa jak modulo z jakiegoś powodu
             break;
         }
         case 6: {
-			erase(memory);
+			Calc.erase(memory);
 			mem_used = false;
 			cout << "Memory cleared\n\n";
 			break;
@@ -120,7 +124,7 @@ void CalculatorBody() {
         }
         default: {
             cout << "Ending program...\n\n";
-			exit_operand = true;
+			Calc.exit();
             break;
         }
     }
@@ -128,9 +132,28 @@ void CalculatorBody() {
 
 int main()//błędy: delenie przez 0 i modulo przez 0
 {
-    while (true) {
+    Kalkulator Calc;
+    while (!Calc.close()) {
         CalculatorBody();
-		if (exit_operand)
-            break;
     }
+    /*
+    Calc1.add(2);
+    Calc1.readMemory();
+    Calc1.add(4);
+    Calc1.readMemory();*/
+    /*while (!Calc.close()) {
+        switch (Menu()) {
+            case 1: {
+                    a = Calc.checkForMemory();
+                    b = getSecondNumber();
+                    Calc.add(a, b);
+                    break;
+            }
+
+            default:
+                Calc.exit();
+                break;
+        }
+
+    }*/
 }

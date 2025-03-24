@@ -129,6 +129,9 @@
   <ItemGroup>
     <ClCompile Include="Kalkulator.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Kalkulator.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
