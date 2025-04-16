@@ -5,8 +5,8 @@
 #include <QMessageBox>
 
 double display = 0.0;
-bool isDecimal = false;
-int decimalPlace = 1;
+//bool Calc.comaClicked() = false;
+//int Calc.getDecimal() = 1;
 const int n = 12;
 Kalkulator Calc;
 
@@ -111,52 +111,51 @@ void MainWindow::clearDisplay()
 {
     display = 0;
     Calc.erase();
-    isDecimal = false;
-    decimalPlace = 1;
+    Calc.resetDecimal();
 
     ui->lcdDisplay->setText(QString::number(display , 'g', n));
 }
 
 void MainWindow::on_Calcbutton_1_clicked()
 {
-    if (!isDecimal) {
+    if (!Calc.comaClicked()) {
         display = display * 10 + 1;
     } else {
-        display = display + 1.0 / pow(10, decimalPlace);
-        decimalPlace++;
+        display = display + 1.0 / pow(10, Calc.getDecimal());
+        Calc.addDecimal();
     }
     ui->lcdDisplay->setText(QString::number(display, 'g', n));;
 }
 
 void MainWindow::on_Calcbutton_2_clicked()
 {
-    if (!isDecimal) {
+    if (!Calc.comaClicked()) {
         display = display * 10 + 2;
     } else {
-        display = display + 2.0 / pow(10, decimalPlace);
-        decimalPlace++;
+        display = display + 2.0 / pow(10, Calc.getDecimal());
+        Calc.addDecimal();
     }
     ui->lcdDisplay->setText(QString::number(display, 'g', n));
 }
 
 void MainWindow::on_Calcbutton_3_clicked()
 {
-    if (!isDecimal) {
+    if (!Calc.comaClicked()) {
         display = display * 10 + 3;
     } else {
-        display = display + 3.0 / pow(10, decimalPlace);
-        decimalPlace++;
+        display = display + 3.0 / pow(10, Calc.getDecimal());
+        Calc.addDecimal();
     }
     ui->lcdDisplay->setText(QString::number(display, 'g', n));
 }
 
 void MainWindow::on_Calcbutton_4_clicked()
 {
-    if (!isDecimal) {
+    if (!Calc.comaClicked()) {
         display = display * 10 + 4;
     } else {
-        display = display + 4.0 / pow(10, decimalPlace);
-        decimalPlace++;
+        display = display + 4.0 / pow(10, Calc.getDecimal());
+        Calc.addDecimal();
     }
     ui->lcdDisplay->setText(QString::number(display, 'g', n));
 }
@@ -164,11 +163,11 @@ void MainWindow::on_Calcbutton_4_clicked()
 
 void MainWindow::on_Calcbutton_5_clicked()
 {
-    if (!isDecimal) {
+    if (!Calc.comaClicked()) {
         display = display * 10 + 5;
     } else {
-        display = display + 5.0 / pow(10, decimalPlace);
-        decimalPlace++;
+        display = display + 5.0 / pow(10, Calc.getDecimal());
+        Calc.addDecimal();
     }
     ui->lcdDisplay->setText(QString::number(display, 'g', n));
 }
@@ -176,11 +175,11 @@ void MainWindow::on_Calcbutton_5_clicked()
 
 void MainWindow::on_Calcbutton_6_clicked()
 {
-    if (!isDecimal) {
+    if (!Calc.comaClicked()) {
         display = display * 10 + 6;
     } else {
-        display = display + 6.0 / pow(10, decimalPlace);
-        decimalPlace++;
+        display = display + 6.0 / pow(10, Calc.getDecimal());
+        Calc.addDecimal();
     }
     ui->lcdDisplay->setText(QString::number(display, 'g', n));
 }
@@ -188,11 +187,11 @@ void MainWindow::on_Calcbutton_6_clicked()
 
 void MainWindow::on_Calcbutton_7_clicked()
 {
-    if (!isDecimal) {
+    if (!Calc.comaClicked()) {
         display = display * 10 + 7;
     } else {
-        display = display + 7.0 / pow(10, decimalPlace);
-        decimalPlace++;
+        display = display + 7.0 / pow(10, Calc.getDecimal());
+        Calc.addDecimal();
     }
     ui->lcdDisplay->setText(QString::number(display, 'g', n));
 }
@@ -200,11 +199,11 @@ void MainWindow::on_Calcbutton_7_clicked()
 
 void MainWindow::on_Calcbutton_8_clicked()
 {
-    if (!isDecimal) {
+    if (!Calc.comaClicked()) {
         display = display * 10 + 8;
     } else {
-        display = display + 8.0 / pow(10, decimalPlace);
-        decimalPlace++;
+        display = display + 8.0 / pow(10, Calc.getDecimal());
+        Calc.addDecimal();
     }
     ui->lcdDisplay->setText(QString::number(display, 'g', n));
 }
@@ -212,11 +211,11 @@ void MainWindow::on_Calcbutton_8_clicked()
 
 void MainWindow::on_Calcbutton_9_clicked()
 {
-    if (!isDecimal) {
+    if (!Calc.comaClicked()) {
         display = display * 10 + 9;
     } else {
-        display = display + 9.0 / pow(10, decimalPlace);
-        decimalPlace++;
+        display = display + 9.0 / pow(10, Calc.getDecimal());
+        Calc.addDecimal();
     }
     ui->lcdDisplay->setText(QString::number(display, 'g', n));
 }
@@ -224,11 +223,11 @@ void MainWindow::on_Calcbutton_9_clicked()
 
 void MainWindow::on_Calcbutton_0_clicked()
 {
-    if (!isDecimal) {
+    if (!Calc.comaClicked()) {
         display = display * 10 + 0;
     } else {
-        display = display + 0.0 / pow(10, decimalPlace);
-        decimalPlace++;
+        display = display + 0.0 / pow(10, Calc.getDecimal());
+        Calc.addDecimal();
     }
     ui->lcdDisplay->setText(QString::number(display, 'g', n));
 }
@@ -241,9 +240,9 @@ void MainWindow::on_Calcbutton_clear_clicked()
 
 void MainWindow::on_Calcbutton_coma_clicked()
 {
-    if (!isDecimal) {
-        isDecimal = true;
-        decimalPlace = 1;
+    if (!Calc.comaClicked()) {
+        Calc.resetDecimal();
+        Calc.isDecimalNum();
         ui->lcdDisplay->setText(QString::number(display, 'g', n) + ".");
     }
 }
@@ -280,6 +279,7 @@ void MainWindow::on_Calcbutton_plus_clicked()
 
     lastOperator = "+";
     display = 0;
+    Calc.resetDecimal();
 }
 
 
@@ -289,6 +289,7 @@ void MainWindow::on_Calcbutton_equals_clicked()
         doOperation();
 
     lastOperator.clear();
+    Calc.resetDecimal();
 }
 
 
@@ -301,6 +302,7 @@ void MainWindow::on_Calcbutton_minus_clicked()
 
     lastOperator = "-";
     display = 0;
+    Calc.resetDecimal();
 }
 
 
@@ -313,6 +315,7 @@ void MainWindow::on_Calcbutton_multiply_clicked()
 
     lastOperator = "*";
     display = 0;
+    Calc.resetDecimal();
 }
 
 
@@ -326,6 +329,7 @@ void MainWindow::on_Calcbutton_divide_clicked()
 
     lastOperator = "/";
     display = 0;
+    Calc.resetDecimal();
 }
 
 
@@ -339,6 +343,7 @@ void MainWindow::on_Calcbutton_modulo_clicked()
 
     lastOperator = "%";
     display = 0;
+    Calc.resetDecimal();
 }
 
 
@@ -361,6 +366,7 @@ void MainWindow::on_readMemory_clicked()
 {
     display = Calc.getMemory(false);
     ui->lcdDisplay->setText(QString::number(display, 'g', n));
+    Calc.resetDecimal();
 }
 
 
@@ -368,6 +374,7 @@ void MainWindow::on_memorySet_clicked()
 {
     Calc.setMemory(display);
     clearDisplay();
+    Calc.resetDecimal();
 }
 
 

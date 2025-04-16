@@ -81,3 +81,27 @@ double Kalkulator::getMemory(bool type) {
     else
         return this->Memory;
 }
+
+void Kalkulator::isDecimalNum(){
+    this->isDecimal = true;
+}
+
+bool Kalkulator::comaClicked(){
+    if(this->isDecimal)
+        return true;
+    else
+        return false;
+}
+
+void Kalkulator::addDecimal(){
+    this->decimalPlace++;
+}
+
+int Kalkulator::getDecimal(){
+    return this->decimalPlace;
+}
+
+void Kalkulator::resetDecimal(){
+    this->isDecimal = false;
+    this->decimalPlace = 1;
+}

@@ -7,6 +7,8 @@ private:
     double Memory = 0.0;
 	bool mem_used = false;
 	bool exit_operand = false;
+    bool isDecimal = false;
+    int decimalPlace = 1;
 
 public:
     void add(double& a, double b);          //dwa parametry dla kalkulatora cmd
@@ -40,6 +42,16 @@ public:
     void erase();
 
     double getMemory(bool type);
+
+    void isDecimalNum();
+
+    bool comaClicked();
+
+    void addDecimal();
+
+    int getDecimal();
+
+    void resetDecimal();
 	
     void exit() {                    //te dwie są do cmd
 		this->exit_operand = true;

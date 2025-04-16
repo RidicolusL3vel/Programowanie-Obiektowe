@@ -50,7 +50,7 @@ void KonwerterLiczb::on_convert_clicked()
     QString wynik = konwerter(input, inputType, outputType);
 
     if(wynik.isEmpty()){
-        QMessageBox::warning(this, "Błąd", "Musisz coś wpisać!");
+        QMessageBox::warning(this, "Błąd", "Puste pole lub niedozwolone znaki!");
         return;
     }
 
