@@ -33,8 +33,8 @@ Plik mainwindow.cpp zawiera 3 zmienne globalne:
 
 Pola prywatne w pliku nagłówkowym;
 - *QString lastOperator* - użwywana w prywatnej metodzie doOperation,
-- *QVector<QPushButton*> operatorButtons oraz numButtons* - wektory zawierające odpowiednio: wszystkie przyciski operacji i wszystkie przyciski numeryczne (włącznie z liczbą π),
-- *QActionGroup\*\ theme* - grupa obiektów typu QAction odpowiadające motywowi aplikacji
+- *QVector<QPushButton\*> operatorButtons oraz numButtons* - wektory zawierające odpowiednio: wszystkie przyciski operacji i wszystkie przyciski numeryczne (włącznie z liczbą π),
+- *QActionGroup\* theme* - grupa obiektów typu QAction odpowiadające motywowi aplikacji
 
 ### Przyciski numeryczne
 Każdy przycisk numeryczny (za wyjątkiem liczby π) ma w swojej definicji blok kodu, który sprawdza czy został w którymś momencie wciśnięty przecinek. Jeśli nie - wyświetla __display__ × 10 + *numer*, jeśli tak - wyświetla __display__ + *numer* / (10^Calc.getDecimal()) i zwiększa liczbę miejsc po przecinku poprzez metodę *Calc.addDecimal()*.
