@@ -1,4 +1,4 @@
-D:/KalkulatorProjekt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/CMakeFiles/KalkulatorProjekt_autogen/EWIEGA46WW/moc_mainwindow.cpp: D:/KalkulatorProjekt/mainwindow.h \
+D:/KalkulatorProjekt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/CMakeFiles/KalkulatorProjekt_autogen/EWIEGA46WW/moc_konwerterliczb.cpp: D:/KalkulatorProjekt/konwerterliczb.h \
   D:/KalkulatorProjekt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/CMakeFiles/KalkulatorProjekt_autogen/moc_predefs.h \
   C:/Qt/6.7.3/mingw_64/include/QtCore/q20functional.h \
   C:/Qt/6.7.3/mingw_64/include/QtCore/q20memory.h \
@@ -117,9 +117,7 @@ D:/KalkulatorProjekt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/CMakeFiles/Kalkul
   C:/Qt/6.7.3/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.7.3/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.7.3/mingw_64/include/QtCore/qyieldcpu.h \
-  C:/Qt/6.7.3/mingw_64/include/QtGui/QActionGroup \
   C:/Qt/6.7.3/mingw_64/include/QtGui/qaction.h \
-  C:/Qt/6.7.3/mingw_64/include/QtGui/qactiongroup.h \
   C:/Qt/6.7.3/mingw_64/include/QtGui/qbitmap.h \
   C:/Qt/6.7.3/mingw_64/include/QtGui/qbrush.h \
   C:/Qt/6.7.3/mingw_64/include/QtGui/qcolor.h \
@@ -144,12 +142,12 @@ D:/KalkulatorProjekt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/CMakeFiles/Kalkul
   C:/Qt/6.7.3/mingw_64/include/QtGui/qtransform.h \
   C:/Qt/6.7.3/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.7.3/mingw_64/include/QtGui/qwindowdefs_win.h \
-  C:/Qt/6.7.3/mingw_64/include/QtWidgets/QMainWindow \
-  C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractbutton.h \
-  C:/Qt/6.7.3/mingw_64/include/QtWidgets/qmainwindow.h \
-  C:/Qt/6.7.3/mingw_64/include/QtWidgets/qpushbutton.h \
+  C:/Qt/6.7.3/mingw_64/include/QtWidgets/QAbstractScrollArea \
+  C:/Qt/6.7.3/mingw_64/include/QtWidgets/QDialog \
+  C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+  C:/Qt/6.7.3/mingw_64/include/QtWidgets/qdialog.h \
+  C:/Qt/6.7.3/mingw_64/include/QtWidgets/qframe.h \
   C:/Qt/6.7.3/mingw_64/include/QtWidgets/qsizepolicy.h \
-  C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtabwidget.h \
   C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtwidgets-config.h \
   C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtwidgetsexports.h \
   C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtwidgetsglobal.h \

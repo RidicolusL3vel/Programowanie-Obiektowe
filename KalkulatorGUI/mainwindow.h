@@ -2,10 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <qpushbutton.h>
+#include <QActionGroup>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
-class MainWindow;
+class Kalkulator;
 }
 QT_END_NAMESPACE
 
@@ -58,11 +60,33 @@ private slots:
 
     void on_Calcbutton_modulo_clicked();
 
+    void on_actionAutor_triggered();
+
+    void on_motywCiemny_triggered(bool checked);
+
+    void on_readMemory_clicked();
+
+    void on_memorySet_clicked();
+
+    void on_clearMemory_clicked();
+
+    void on_PI_clicked();
+
+    void on_motywJasny_triggered(bool checked);
+
+    void on_actionKonwerter_triggered();
+
 private:
-    Ui::MainWindow *ui;
+    Ui::Kalkulator *ui;
     QString lastOperator;
-    void resetButtonStyle();
+    //void resetButtonStyle();
     void doOperation();
     void clearDisplay();
+    //void defaultOperatorButtonStyle();
+    QVector<QPushButton*> operatorButtons;
+    QVector<QPushButton*> numButtons;
+    QActionGroup* theme;
+    void motywJasny();
+    void motywCiemny();
 };
 #endif // MAINWINDOW_H

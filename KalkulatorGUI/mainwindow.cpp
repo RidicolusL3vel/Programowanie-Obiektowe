@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include "Kalkulator.h"
+#include "konwerterliczb.h"
 #include <QMessageBox>
 
 double display = 0.0;
@@ -11,11 +12,29 @@ Kalkulator Calc;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , ui(new Ui::Kalkulator)
 {
     ui->setupUi(this);
 
     lastOperator = "";
+
+    operatorButtons = {
+        ui->Calcbutton_plus, ui->Calcbutton_minus, ui->Calcbutton_multiply, ui->Calcbutton_divide,
+        ui->Calcbutton_modulo, ui->Calcbutton_equals, ui->Calcbutton_coma, ui->Calcbutton_clear,
+        ui->sqrt, ui->Calcbutton_sign, ui->clearMemory, ui->readMemory, ui->memorySet
+    };
+
+    numButtons = {
+        ui->Calcbutton_0, ui->Calcbutton_1, ui->Calcbutton_2, ui->Calcbutton_3,
+        ui->Calcbutton_4, ui->Calcbutton_5, ui->Calcbutton_6, ui->Calcbutton_7,
+        ui->Calcbutton_8, ui->Calcbutton_9, ui->PI,
+    };
+
+    theme = new QActionGroup(this);
+    theme->addAction(ui->motywJasny);
+    theme->addAction(ui->motywCiemny);
+    theme->setExclusive(true);
+    ui->motywJasny->setChecked(true);
 }
 
 MainWindow::~MainWindow()
@@ -23,14 +42,41 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::resetButtonStyle()
+void MainWindow::motywJasny()
 {
-    ui->Calcbutton_plus->setStyleSheet("");
-    ui->Calcbutton_minus->setStyleSheet("");
-    ui->Calcbutton_multiply->setStyleSheet("");
-    ui->Calcbutton_divide->setStyleSheet("");
-    ui->Calcbutton_modulo->setStyleSheet("");
-    ui->sqrt->setStyleSheet("");
+    for(QPushButton* btn : std::as_const(operatorButtons)){
+        btn->setStyleSheet("QPushButton { border-radius: 15px; background-color: #FF8C00;color: #000000}"
+                           "QPushButton:pressed { border-radius: 15px;background-color: #00FF00; color: #000000} "
+                           );
+    }
+    for(QPushButton* btn : std::as_const(numButtons)){
+        btn->setStyleSheet("QPushButton{ border-radius: 15px; background-color: #C0C0C0; color: #000000;}"
+                           "QPushButton:pressed{ border-radius: 15px; background-color: #696969; color: #000000; font: 700 15pt \"Segoe UI\";}"
+                           );
+    }
+    ui->centralwidget->setStyleSheet("QWidget#centralwidget{background-color: #E0FFFF; color: #000000}");
+    this->setStyleSheet("QMainWindow#Kalkulator{background-color: #E0FFFF; color: #000000}");
+    ui->menubar->setStyleSheet("QMenuBar#menubar{background-color: #E0FFFF; color: #000000}");
+    ui->lcdDisplay->setStyleSheet("QLineEdit#lcdDisplay{border: 5px solid black ;background-color; C0C0C0; color: #000000}");
+}
+
+void MainWindow::motywCiemny()
+{
+    for(QPushButton* btn : std::as_const(operatorButtons)){//styl przycisków operatora dla motywu ciemnego
+        btn->setStyleSheet(
+            "QPushButton {border-radius: 15px;background-color: solid;background-color: #00008B;color: #FFFFFF;}"
+            "QPushButton:pressed {border-radius: 15px;background-color: solid; background-color: #708090;color: #FFFFFF; }"
+            );
+    }
+    for(QPushButton* btn : std::as_const(numButtons)){
+        btn->setStyleSheet("QPushButton{ border-radius: 15px; background-color: solid; background-color: #696969; color: #FFFFFF;}"
+                           "QPushButton:pressed{ border-radius: 15px; background-color: solid; background-color: #D2B48C; color: #FFFFFF; font: 700 15pt \"Segoe UI\";}"
+                           );
+    }
+    ui->centralwidget->setStyleSheet("QWidget#centralwidget{background-color: #000000; color: #FFFFFF;}");
+    this->setStyleSheet("QMainWindow#Kalkulator{background-color: #000000; color: #FFFFFF;}");
+    ui->menubar->setStyleSheet("QMenuBar#menubar{background-color: #000000; color: #FFFFFF}");
+    ui->lcdDisplay->setStyleSheet("QLineEdit#lcdDisplay{border: 5px solid #2F4F4F ;background-color; C0C0C0; color: #000000}");
 }
 
 void MainWindow::doOperation()
@@ -57,8 +103,8 @@ void MainWindow::doOperation()
         }
         Calc.modulo(display);
     }
-    ui->lcdDisplay->setText(QString::number(Calc.getMemory(), 'g', n));
-    display = Calc.getMemory();
+    ui->lcdDisplay->setText(QString::number(Calc.getMemory(true), 'g', n));
+    display = Calc.getMemory(true);
 }
 
 void MainWindow::clearDisplay()
@@ -69,8 +115,6 @@ void MainWindow::clearDisplay()
     decimalPlace = 1;
 
     ui->lcdDisplay->setText(QString::number(display , 'g', n));
-
-    resetButtonStyle();
 }
 
 void MainWindow::on_Calcbutton_1_clicked()
@@ -81,7 +125,7 @@ void MainWindow::on_Calcbutton_1_clicked()
         display = display + 1.0 / pow(10, decimalPlace);
         decimalPlace++;
     }
-    ui->lcdDisplay->setText(QString::number(display, 'g', n));
+    ui->lcdDisplay->setText(QString::number(display, 'g', n));;
 }
 
 void MainWindow::on_Calcbutton_2_clicked()
@@ -214,8 +258,6 @@ void MainWindow::on_Calcbutton_sign_clicked()
 
 void MainWindow::on_sqrt_clicked()
 {
-    resetButtonStyle();
-
     if(display < 0){
         QMessageBox::critical(this, "ERROR", "Próba spierwiastkowania liczby ujemnej");
         clearDisplay();
@@ -225,23 +267,19 @@ void MainWindow::on_sqrt_clicked()
     display = std::sqrt(display);
 
     ui->lcdDisplay->setText(QString::number(display, 'g', n));
-
-    ui->sqrt->setStyleSheet("background-color: lightgreen;");
 }
 
 
 void MainWindow::on_Calcbutton_plus_clicked()
 {
-    resetButtonStyle();
 
     if(lastOperator.isEmpty())
-        Calc.setMemory(display);
+        Calc.setCache(display);
     else
         doOperation();
 
     lastOperator = "+";
     display = 0;
-    ui->Calcbutton_plus->setStyleSheet("background-color: lightgreen;");
 }
 
 
@@ -251,66 +289,113 @@ void MainWindow::on_Calcbutton_equals_clicked()
         doOperation();
 
     lastOperator.clear();
-    resetButtonStyle();
 }
 
 
 void MainWindow::on_Calcbutton_minus_clicked()
 {
-    resetButtonStyle();
-
     if(lastOperator.isEmpty())
-        Calc.setMemory(display);
+        Calc.setCache(display);
     else
         doOperation();
 
     lastOperator = "-";
     display = 0;
-    ui->Calcbutton_minus->setStyleSheet("background-color: lightgreen;");
 }
 
 
 void MainWindow::on_Calcbutton_multiply_clicked()
 {
-    resetButtonStyle();
-
     if(lastOperator.isEmpty())
-        Calc.setMemory(display);
+        Calc.setCache(display);
     else
         doOperation();
 
     lastOperator = "*";
     display = 0;
-    ui->Calcbutton_multiply->setStyleSheet("background-color: lightgreen;");
 }
 
 
 void MainWindow::on_Calcbutton_divide_clicked()
 {
-    resetButtonStyle();
     //obsługa dzielenia przez 0 jest w funkcji doOperation()
     if(lastOperator.isEmpty())
-        Calc.setMemory(display);
+        Calc.setCache(display);
     else
         doOperation();
 
     lastOperator = "/";
     display = 0;
-    ui->Calcbutton_divide->setStyleSheet("background-color: lightgreen;");
 }
 
 
 void MainWindow::on_Calcbutton_modulo_clicked()
 {
-    resetButtonStyle();
     //obsługa dzielenia przez 0 jest w funkcji doOperation()
     if(lastOperator.isEmpty())
-        Calc.setMemory(display);
+        Calc.setCache(display);
     else
         doOperation();
 
     lastOperator = "%";
     display = 0;
-    ui->Calcbutton_modulo->setStyleSheet("background-color: lightgreen;");
+}
+
+
+void MainWindow::on_actionAutor_triggered()
+{
+    QMessageBox::information(this, "Autor Kalkulatora", "Jan Bieszczad\nIndeks: 287097\nWydział W12N", QMessageBox::Close, QMessageBox::Close);
+}
+
+
+
+void MainWindow::on_motywCiemny_triggered(bool checked)
+{
+    if(checked){
+        motywCiemny();
+    }
+}
+
+
+void MainWindow::on_readMemory_clicked()
+{
+    display = Calc.getMemory(false);
+    ui->lcdDisplay->setText(QString::number(display, 'g', n));
+}
+
+
+void MainWindow::on_memorySet_clicked()
+{
+    Calc.setMemory(display);
+    clearDisplay();
+}
+
+
+void MainWindow::on_clearMemory_clicked()
+{
+    Calc.setMemory(0);
+}
+
+
+void MainWindow::on_PI_clicked()
+{
+    display = M_PI;
+    ui->lcdDisplay->setText(QString::number(display, 'g', n));
+}
+
+
+void MainWindow::on_motywJasny_triggered(bool checked)
+{
+    if(checked){
+        motywJasny();
+    }
+}
+
+
+void MainWindow::on_actionKonwerter_triggered()
+{
+    KonwerterLiczb *konw = new KonwerterLiczb();
+    konw->setAttribute(Qt::WA_DeleteOnClose);
+    konw->exec();
 }
 

@@ -3,7 +3,8 @@
 class Kalkulator
 {
 private:
-    double memory = 0.0;
+    double cache = 0.0;
+    double Memory = 0.0;
 	bool mem_used = false;
 	bool exit_operand = false;
 
@@ -34,13 +35,15 @@ public:
 
     bool checkforMemory();    //dla kalkulatora GUI
 
-    void setMemory(double display);   //dla kalkulatora GUI
+    void setMemory(double display);    //dla kalkulatora GUI
+
+    void setCache(double display);
 
     void erase();
 
-	double getMemory();
+    double getMemory(bool type);
 	
-	void exit() {
+    void exit() {                    //te dwie są do cmd
 		this->exit_operand = true;
 	}
 
