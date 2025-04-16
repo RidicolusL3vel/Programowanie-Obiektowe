@@ -29,8 +29,6 @@ public:
 
     void modulo(double b);
 
-    void sqrt(double b);  //dla GUI i CMD
-
     double checkForMemory(double & memory);  //dla kalkulatora cmd
 
     bool checkforMemory();    //dla kalkulatora GUI
