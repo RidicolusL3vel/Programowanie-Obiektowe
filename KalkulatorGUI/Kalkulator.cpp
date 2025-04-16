@@ -43,10 +43,6 @@ void Kalkulator::modulo(double b){
         this->cache = this->cache - (int)(this->cache / b) * b;
 }
 
-void Kalkulator::sqrt(double b)
-{
-    this->cache = std::sqrt(b);
-}
 void Kalkulator::erase() {
     this->cache = 0;
     this->mem_used = false;
