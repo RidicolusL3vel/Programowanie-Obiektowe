@@ -1,2 +1,1 @@
-# Programowanie-Obiektowe
-Repozytorium użytkowe do zajęć z programowania obiektowego
+[README.md](https://github.com/user-attachments/files/19783847/README.md)
